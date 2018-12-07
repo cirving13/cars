@@ -2,20 +2,32 @@
 # cars.sh
 # Cameron Irving
 
-continue=yes
-while [ "$continue" -eq "yes" ]
+continue=0
+while [ "$continue" -eq 0 ]
 do 
+	clear
 	echo 1. Enter a new car
 	echo 2. See list of cars
-	echo Q. Quit
+	echo 3. Quit
 	read input
 	
 	if [ "$input" -eq "1" ]
 	then
-		echo What is the year of the car?
+		echo "What is the year of the car? "
 		read year
-		echo What is the make of the car?
+		echo "What is the make of the car? "
 		read make
-		echo What is the model of the car?
+		echo "What is the model of the car? "
 		read model
-	elif
+		echo "$year:$make:$model" >> my_old_cars
+		
+	elif [ "$input" -eq "2" ]
+	then
+		sort -n my_old_cars
+		echo "Press enter to continue "
+		read command
+	else
+		echo "Adios"
+		continue=1 
+	fi
+done
